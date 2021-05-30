@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "250468988207",
+    "project_id": "inventorypln",
+    "storage_bucket": "inventorypln.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250468988207:android:ac00804a8d1ca626145dda",
+        "android_client_info": {
+          "package_name": "id.example.repositorypln"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "250468988207-ebc09ch2j5j7nhv1lfj2dkbpfvb3ivqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH_yLCYdvXEbRjgAswzYd5Usn6clm3DfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "250468988207-ebc09ch2j5j7nhv1lfj2dkbpfvb3ivqv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
