@@ -1,14 +1,21 @@
 package id.example.repositorypln;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +39,9 @@ public class AddBarang extends AppCompatActivity {
         String ketB = getIntent().getStringExtra("ket");
         String keyB = getIntent().getStringExtra("key");
         String hargaB  = getIntent().getStringExtra("harga");
+        boolean edit = getIntent().getBooleanExtra("edit", false);
+
+        Log.i("TAG", "onCreate: "+keyB);
 
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("barangs");
@@ -43,19 +53,20 @@ public class AddBarang extends AppCompatActivity {
         keterangan = findViewById(R.id.keterangan);
         tambahBarang = findViewById(R.id.tambahBarang);
 
-        if (keyB != null){
-            if (!keyB.contains("")){
-                tambahBarang.setText("Edit Barang");
-            }
+        if (edit){
+            tambahBarang.setText("Edit Barang");
+            harga.setText(hargaB);
+            nama.setText(namaB);
+            inventaris.setText(noB);
+            status.setText(statusB);
+            keterangan.setText(ketB);
         }
 
         tambahBarang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (keyB != null){
-                    if (!keyB.contains("")){
-                        editbarang(namaB, noB, statusB, ketB, keyB,  hargaB);
-                    }
+                if (edit){
+                    editbarang(nama.getText().toString(), inventaris.getText().toString(), status.getText().toString(), keterangan.getText().toString(),keyB, harga.getText().toString());
                 }else {
                     addBarang(nama.getText().toString(), inventaris.getText().toString(), status.getText().toString(), keterangan.getText().toString(), harga.getText().toString());
                 }
@@ -68,13 +79,16 @@ public class AddBarang extends AppCompatActivity {
         Barang barang = new Barang(nama, no, status, ket, harga);
 
         ref.child(uploadId).setValue(barang);
+        startActivity(new Intent(AddBarang.this, AdminActivity.class));
         finish();
     }
 
     private void editbarang(String nama, String no, String status, String ket, String key,String harga){
         Barang barang = new Barang(nama, no, status, ket, harga);
 
-        ref.child(ket).setValue(barang);
+        ref.child(key).setValue(barang);
+
+        startActivity(new Intent(AddBarang.this, AdminActivity.class));
         finish();
     }
 }

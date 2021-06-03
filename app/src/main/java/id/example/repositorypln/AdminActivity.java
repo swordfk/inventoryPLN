@@ -47,16 +47,12 @@ public class AdminActivity extends AppCompatActivity {
     private ValueEventListener mDBListener;
     private List<Barang> listBarang = new ArrayList<>();
     ImageView add;
-    FirebaseAuth mAuth;
-    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        mAuth = FirebaseAuth.getInstance();
         add = findViewById(R.id.imageAdd);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,65 +89,6 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.option_menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-
-            case R.id.logout:
-                mAuth.signOut();
-                finish();
-                break;
-
-            case R.id.changePassword:
-                //Do Logout
-                Dialog dialog2 = new Dialog(AdminActivity.this);
-                dialog2.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog2.setContentView(R.layout.dialog_ubahpassword);
-                dialog2.getWindow().setGravity(Gravity.CENTER);
-                dialog2.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                dialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-                EditText newPassword = dialog2.findViewById(R.id.password);
-                dialog2.show();
-
-                Button konfirmasi = dialog2.findViewById(R.id.konfirmasi);
-                konfirmasi.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        AuthCredential credential = EmailAuthProvider
-                                .getCredential(user.getEmail(), "user123");
-                        user.reauthenticate(credential)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            user.updatePassword(newPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()) {
-                                                        dialog2.cancel();
-                                                        Toast.makeText(AdminActivity.this, "Password berhasil di ubah", Toast.LENGTH_SHORT).show();
-                                                    } else {
-                                                        Log.d("TAG", "Error password not updated");
-                                                    }
-                                                }
-                                            });
-                                        } else {
-                                            Log.d("TAG", "Error auth failed");
-                                        }
-                                    }
-                                });
-                    }
-                });
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 }

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -21,21 +22,36 @@ import id.example.repositorypln.model.Barang;
 
 public class DashboardAdmin extends AppCompatActivity {
     RecyclerView recyclerView;
-    RecyclerView.Adapter adapter;
+    AdapterBarangAdmin adapter;
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
     private DatabaseReference mDatabaseRef;
     private ValueEventListener mDBListener;
     private List<Barang> listBarang = new ArrayList<>();
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_admin);
 
+        searchView = findViewById(R.id.searchview);
         recyclerView = findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         getData();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+                return false;
+            }
+        });
     }
 
     private void getData(){

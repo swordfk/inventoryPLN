@@ -32,10 +32,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import id.example.repositorypln.model.Barang;
 import id.example.repositorypln.model.Permintaan;
-
-import static java.util.Calendar.MONTH;
 
 public class MainKepalaGudang extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -119,7 +116,7 @@ public class MainKepalaGudang extends AppCompatActivity {
 
                 int totalharga = 0;
                 for (int i=0; i<listPermintaan.size(); i++){
-                    totalharga += Integer.parseInt(listPermintaan.get(i).getHargaB());
+                    totalharga += Integer.parseInt(listPermintaan.get(i).getPerolB());
                 }
 
                 total.setText(String.valueOf(totalharga));
@@ -161,7 +158,7 @@ public class MainKepalaGudang extends AppCompatActivity {
 
                 int totalharga = 0;
                 for (int i=0; i<listPermintaan.size(); i++){
-                    totalharga += Integer.parseInt(listPermintaan.get(i).getHargaB());
+                    totalharga += Integer.parseInt(listPermintaan.get(i).getPerolB());
                 }
 
                 total.setText(String.valueOf(totalharga));
@@ -176,12 +173,12 @@ public class MainKepalaGudang extends AppCompatActivity {
     public void exportExcel(){
         //generate data
         StringBuilder data = new StringBuilder();
-        data.append("Nama,Nama Barang,No Inventaris, Harga Barang, Status Permintaan,Tanggal,Tempat");
+        data.append("Nama,Nama Barang,No Inventaris, Nilai Perol, Status Permintaan,Tanggal,Tempat");
         for(int i = 0; i<listPermintaan.size(); i++){
             data.append("\n"+listPermintaan.get(i).getNama()+
                     ","+listPermintaan.get(i).getNamaB()+
                     ","+listPermintaan.get(i).getNoInventarisB()+
-                    ","+listPermintaan.get(i).getHargaB()+
+                    ","+listPermintaan.get(i).getPerolB()+
                     ","+listPermintaan.get(i).getStatusPermintaan()+
                     ","+listPermintaan.get(i).getTanggal()+
                     ","+listPermintaan.get(i).getTempat());

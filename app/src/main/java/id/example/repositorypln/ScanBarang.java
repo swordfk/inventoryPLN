@@ -1,6 +1,5 @@
 package id.example.repositorypln;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -21,20 +20,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.zxing.Result;
 import com.google.zxing.ResultPoint;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.journeyapps.barcodescanner.camera.CameraSettings;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-import id.example.repositorypln.model.Barang;
 import id.example.repositorypln.model.Permintaan;
 
 public class ScanBarang extends AppCompatActivity {
@@ -102,7 +95,7 @@ public class ScanBarang extends AppCompatActivity {
                     public void onClick(View view) {
                         Permintaan permintaan = new Permintaan(barang.getTanggal(), barang.getNama(), barang.getTempat(), "selesai",
                                 barang.getNamaB(), barang.getKeyB(), barang.getNoInventarisB(),
-                                barang.getStatusB(), barang.getKeteranganB(), barang.getHargaB());
+                                barang.getStatusB(), barang.getKeteranganB(), barang.getPerolB());
 
                         mDatabaseRef3.child(mDatabaseRef3.push().getKey()).setValue(permintaan);
                         mDatabaseRef.child(barang.key).setValue(permintaan);

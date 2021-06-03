@@ -15,7 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-import id.example.repositorypln.model.Barang;
 import id.example.repositorypln.model.Permintaan;
 
 public class AdapterBarangGudang extends RecyclerView.Adapter<AdapterBarangGudang.viewHolder> {
@@ -41,7 +40,7 @@ public class AdapterBarangGudang extends RecyclerView.Adapter<AdapterBarangGudan
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("permintaan");
 
-        holder.harga.setText("Harga : "+arrayList.get(position).getHargaB());
+        holder.harga.setText("Nilai Perol : "+arrayList.get(position).getPerolB());
         holder.namaB.setText("Nama Barang : "+arrayList.get(position).getNamaB());
         holder.no.setText("No Inv : "+arrayList.get(position).getNoInventarisB());
         holder.nama.setText("Peminjam : "+arrayList.get(position).getNama());
@@ -59,7 +58,7 @@ public class AdapterBarangGudang extends RecyclerView.Adapter<AdapterBarangGudan
             public void onClick(View view) {
                 Permintaan permintaan = new Permintaan(arrayList.get(position).getTanggal(), arrayList.get(position).getNama(), arrayList.get(position).getTempat(), "terima",
                         arrayList.get(position).getNamaB(), arrayList.get(position).getKeyB(), arrayList.get(position).getNoInventarisB(),
-                        arrayList.get(position).getStatusB(), arrayList.get(position).getKeteranganB(), arrayList.get(position).getHargaB());
+                        arrayList.get(position).getStatusB(), arrayList.get(position).getKeteranganB(), arrayList.get(position).getPerolB());
 
                 ref.child(arrayList.get(position).getKey()).setValue(permintaan);
             }
@@ -69,7 +68,7 @@ public class AdapterBarangGudang extends RecyclerView.Adapter<AdapterBarangGudan
             public void onClick(View view) {
                 Permintaan permintaan = new Permintaan(arrayList.get(position).getTanggal(), arrayList.get(position).getNama(), arrayList.get(position).getTempat(), "tolak",
                         arrayList.get(position).getNama(), arrayList.get(position).getKey(), arrayList.get(position).getNoInventarisB(),
-                        arrayList.get(position).getStatusB(), arrayList.get(position).getKeteranganB(),  arrayList.get(position).getHargaB());
+                        arrayList.get(position).getStatusB(), arrayList.get(position).getKeteranganB(),  arrayList.get(position).getPerolB());
 
                 ref.child(arrayList.get(position).getKey()).setValue(permintaan);
             }

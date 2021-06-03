@@ -48,10 +48,10 @@ public class AdapterBarangAdmin2 extends RecyclerView.Adapter<AdapterBarangAdmin
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("barangs");
 
-        holder.harga.setText("Harga : "+arrayList.get(position).getHarga());
+        holder.harga.setText("Nilai Perol : "+arrayList.get(position).getNilaiPerol());
         holder.nama.setText("Nama barang : "+arrayList.get(position).getNama());
         holder.no.setText("No Inv : "+arrayList.get(position).getNoInventaris());
-        holder.status.setText("Status : "+arrayList.get(position).getKeterangan());
+        holder.status.setText("Status : "+arrayList.get(position).getStatus());
 
         holder.layout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -85,8 +85,11 @@ public class AdapterBarangAdmin2 extends RecyclerView.Adapter<AdapterBarangAdmin
                         i.putExtra("no", arrayList.get(position).getNoInventaris());
                         i.putExtra("status", arrayList.get(position).getStatus());
                         i.putExtra("ket", arrayList.get(position).getKeterangan());
+                        i.putExtra("harga", arrayList.get(position).getNilaiPerol());
                         i.putExtra("key", arrayList.get(position).getKey());
+                        i.putExtra("edit", true);
                         context.startActivity(i);
+                        ((AdminActivity) context).finish();
                     }
                 });
                 return false;

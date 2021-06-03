@@ -5,15 +5,11 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -38,7 +34,7 @@ public class AdapterPermintaanUser extends RecyclerView.Adapter<AdapterPermintaa
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
-        holder.harga.setText("Harga : "+arrayList.get(position).getHargaB());
+        holder.harga.setText("Nilai Perol : "+arrayList.get(position).getPerolB());
         holder.namaB.setText("Nama Barang : "+arrayList.get(position).getNamaB());
         holder.no.setText("No Inv : "+arrayList.get(position).getNoInventarisB());
         holder.nama.setText("Peminjam : "+arrayList.get(position).getNama());

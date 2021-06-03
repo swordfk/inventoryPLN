@@ -6,25 +6,25 @@ public class Barang {
     public String noInventaris;
     public String status;
     public String keterangan;
-    public String harga;
+    public String nilaiPerol;
 
-    public Barang(String nama, String noInventaris, String status, String keterangan, String harga) {
+    public Barang(String nama, String noInventaris, String status, String keterangan, String nilaiPerol) {
         this.nama = nama;
         this.noInventaris = noInventaris;
         this.status = status;
         this.keterangan = keterangan;
-        this.harga = harga;
+        this.nilaiPerol = nilaiPerol;
     }
 
     public Barang() {
     }
 
-    public String getHarga() {
-        return harga;
+    public String getNilaiPerol() {
+        return nilaiPerol;
     }
 
-    public void setHarga(String harga) {
-        this.harga = harga;
+    public void setNilaiPerol(String nilaiPerol) {
+        this.nilaiPerol = nilaiPerol;
     }
 
     public String getKey() {

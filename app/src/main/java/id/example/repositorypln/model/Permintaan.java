@@ -8,7 +8,7 @@ public class Permintaan {
     public String statusPermintaan;
     public String namaB;
     public String keyB;
-    public String hargaB;
+    public String perolB;
     public String noInventarisB;
     public String statusB;
     public String keteranganB;
@@ -16,7 +16,7 @@ public class Permintaan {
     public Permintaan() {
     }
 
-    public Permintaan(String tanggal, String nama, String tempat, String statusPermintaan, String namaB, String keyB, String noInventarisB, String statusB, String keteranganB, String hargaB) {
+    public Permintaan(String tanggal, String nama, String tempat, String statusPermintaan, String namaB, String keyB, String noInventarisB, String statusB, String keteranganB, String perolB) {
         this.nama = nama;
         this.tempat = tempat;
         this.statusPermintaan = statusPermintaan;
@@ -26,15 +26,15 @@ public class Permintaan {
         this.noInventarisB = noInventarisB;
         this.statusB = statusB;
         this.keteranganB = keteranganB;
-        this.hargaB = hargaB;
+        this.perolB = perolB;
     }
 
-    public String getHargaB() {
-        return hargaB;
+    public String getPerolB() {
+        return perolB;
     }
 
-    public void setHargaB(String hargaB) {
-        this.hargaB = hargaB;
+    public void setPerolB(String perolB) {
+        this.perolB = perolB;
     }
 
     public String getTanggal() {

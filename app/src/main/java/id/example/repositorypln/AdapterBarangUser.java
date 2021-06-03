@@ -58,7 +58,7 @@ public class AdapterBarangUser extends RecyclerView.Adapter<AdapterBarangUser.vi
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("permintaan");
 
-        holder.harga.setText("Harga : "+arrayList.get(position).getHarga());
+        holder.harga.setText("Nilai Perol : "+arrayList.get(position).getNilaiPerol());
         holder.nama.setText("Peminjam : "+arrayList.get(position).getNama());
         holder.no.setText("No Inv : "+arrayList.get(position).getNoInventaris());
         holder.status.setText("Status : "+arrayList.get(position).getKeterangan());
@@ -88,7 +88,7 @@ public class AdapterBarangUser extends RecyclerView.Adapter<AdapterBarangUser.vi
 
                         Permintaan permintaan = new Permintaan(formattedDate, nama.getText().toString(), tempat.getText().toString(), "proses",
                                 arrayList.get(position).getNama(), arrayList.get(position).getKey(), arrayList.get(position).getNoInventaris(),
-                                arrayList.get(position).getStatus(), arrayList.get(position).getKeterangan(), arrayList.get(position).getHarga());
+                                arrayList.get(position).getStatus(), arrayList.get(position).getKeterangan(), arrayList.get(position).getNilaiPerol());
 
                         String uploadId = ref.push().getKey();
                         ref.child(uploadId).setValue(permintaan);
