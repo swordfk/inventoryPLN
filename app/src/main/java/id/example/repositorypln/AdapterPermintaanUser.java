@@ -38,12 +38,16 @@ public class AdapterPermintaanUser extends RecyclerView.Adapter<AdapterPermintaa
         holder.namaB.setText("Nama Barang : "+arrayList.get(position).getNamaB());
         holder.no.setText("No Inv : "+arrayList.get(position).getNoInventarisB());
         holder.nama.setText("Peminjam : "+arrayList.get(position).getNama());
+        holder.status.setText(arrayList.get(position).getStatusPermintaan());
         if (arrayList.get(position).getStatusPermintaan().contains("terima")){
-            holder.layout.setBackgroundColor(Color.BLUE);
+//            holder.layout.setBackgroundColor(Color.BLUE);
+            holder.status.setTextColor(Color.BLUE);
         }else if (arrayList.get(position).getStatusPermintaan().contains("tolak")){
-            holder.layout.setBackgroundColor(Color.RED);
+//            holder.layout.setBackgroundColor(Color.RED);
+            holder.status.setTextColor(Color.RED);
         }else if (arrayList.get(position).getStatusPermintaan().contains("selesai")){
-            holder.layout.setBackgroundColor(Color.GREEN);
+//            holder.layout.setBackgroundColor(Color.GREEN);
+            holder.status.setTextColor(Color.GREEN);
         }
     }
 
@@ -53,12 +57,13 @@ public class AdapterPermintaanUser extends RecyclerView.Adapter<AdapterPermintaa
     }
 
     public class viewHolder extends RecyclerView.ViewHolder {
-        TextView namaB, no, nama, harga;
+        TextView namaB, no, nama, harga, status;
         LinearLayout layout;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
 
+            status = itemView.findViewById(R.id.statusPermintaan);
             harga = itemView.findViewById(R.id.harga);
             layout = itemView.findViewById(R.id.layoutParent);
             namaB = itemView.findViewById(R.id.namaBarang);
