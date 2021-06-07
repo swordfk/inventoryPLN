@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -31,6 +32,7 @@ public class AdminDash extends AppCompatActivity {
     CardView pinjam, riwayat;
     FirebaseAuth mAuth;
     FirebaseUser user;
+    ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,35 +86,51 @@ public class AdminDash extends AppCompatActivity {
                 dialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
                 EditText newPassword = dialog2.findViewById(R.id.password);
+                EditText passwordLama = dialog2.findViewById(R.id.passwordLama);
                 dialog2.show();
 
                 Button konfirmasi = dialog2.findViewById(R.id.konfirmasi);
                 konfirmasi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        AuthCredential credential = EmailAuthProvider
-                                .getCredential(user.getEmail(), "user123");
-                        user.reauthenticate(credential)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            user.updatePassword(newPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()) {
-                                                        dialog2.cancel();
-                                                        Toast.makeText(AdminDash.this, "Password berhasil di ubah", Toast.LENGTH_SHORT).show();
-                                                    } else {
-                                                        Log.d("TAG", "Error password not updated");
+                        loading = ProgressDialog.show(
+                                view.getContext(),
+                                null,
+                                "Loading...",
+                                true,
+                                true
+                        );
+                        if (passwordLama.getText().toString().length()!=0){
+                            AuthCredential credential = EmailAuthProvider
+                                    .getCredential(user.getEmail(), passwordLama.getText().toString());
+                            user.reauthenticate(credential)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                user.updatePassword(newPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            loading.dismiss();
+                                                            dialog2.cancel();
+                                                            Toast.makeText(AdminDash.this, "Password berhasil di ubah", Toast.LENGTH_SHORT).show();
+                                                            startActivity(new Intent(view.getContext(), Login.class));
+                                                            finish();
+                                                        } else {
+                                                            Log.d("TAG", "Error password not updated");
+                                                        }
                                                     }
-                                                }
-                                            });
-                                        } else {
-                                            Log.d("TAG", "Error auth failed");
+                                                });
+                                            } else {
+                                                Log.d("TAG", "Error auth failed");
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                        }else {
+                            loading.dismiss();
+                            Toast.makeText(AdminDash.this, "Masukkan password lama", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 break;
