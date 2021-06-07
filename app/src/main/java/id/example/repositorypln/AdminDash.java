@@ -27,7 +27,7 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AdminItil extends AppCompatActivity {
+public class AdminDash extends AppCompatActivity {
     CardView pinjam, riwayat;
     FirebaseAuth mAuth;
     FirebaseUser user;
@@ -35,7 +35,7 @@ public class AdminItil extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_itil);
+        setContentView(R.layout.activity_admin_dash);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
@@ -45,13 +45,13 @@ public class AdminItil extends AppCompatActivity {
         pinjam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdminItil.this, AdminActivity.class));
+                startActivity(new Intent(AdminDash.this, AdminActivity.class));
             }
         });
         riwayat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(AdminItil.this, MainKepalaGudang.class);
+                Intent i = new Intent(AdminDash.this, MainKepalaGudang.class);
                 i.putExtra("query", "selesai");
                 startActivity(i);
             }
@@ -76,7 +76,7 @@ public class AdminItil extends AppCompatActivity {
 
             case R.id.changePassword:
                 //Do Logout
-                Dialog dialog2 = new Dialog(AdminItil.this);
+                Dialog dialog2 = new Dialog(AdminDash.this);
                 dialog2.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog2.setContentView(R.layout.dialog_ubahpassword);
                 dialog2.getWindow().setGravity(Gravity.CENTER);
@@ -102,7 +102,7 @@ public class AdminItil extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
                                                         dialog2.cancel();
-                                                        Toast.makeText(AdminItil.this, "Password berhasil di ubah", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(AdminDash.this, "Password berhasil di ubah", Toast.LENGTH_SHORT).show();
                                                     } else {
                                                         Log.d("TAG", "Error password not updated");
                                                     }

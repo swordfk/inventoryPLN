@@ -56,7 +56,7 @@ public class Login extends AppCompatActivity {
                             }else if (email.contains("gudang")){
                                 startActivity(new Intent(Login.this, GudangActivity.class));
                             }else if (email.contains("admin")){
-                                startActivity(new Intent(Login.this, AdminItil.class));
+                                startActivity(new Intent(Login.this, AdminDash.class));
                             }
                         } else {
                             // If sign in fails, display a message to the user.

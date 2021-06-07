@@ -91,4 +91,12 @@ public class AddBarang extends AppCompatActivity {
         startActivity(new Intent(AddBarang.this, AdminActivity.class));
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        startActivity(new Intent(AddBarang.this, AdminActivity.class));
+        finish();
+    }
 }

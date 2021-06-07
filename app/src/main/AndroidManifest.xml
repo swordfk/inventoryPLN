@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RepositoryPLN">
-        <activity android:name=".AdminItil"></activity>
+        <activity android:name=".AdminDash"></activity>
         <activity android:name=".AdminActivity" />
         <activity android:name=".GudangActivity" />
         <activity android:name=".UserView" />

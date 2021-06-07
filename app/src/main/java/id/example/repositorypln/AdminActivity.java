@@ -58,6 +58,7 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(AdminActivity.this, AddBarang.class));
+                finish();
             }
         });
         recyclerView = findViewById(R.id.recycleview);
@@ -73,9 +74,9 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listBarang.clear();
-                for (DataSnapshot ktpSnapshot : snapshot.getChildren()) {
-                    Barang upload = ktpSnapshot.getValue(Barang.class);
-                    upload.setKey(ktpSnapshot.getKey());
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    Barang upload = snapshot1.getValue(Barang.class);
+                    upload.setKey(snapshot1.getKey());
                     listBarang.add(upload);
                 }
                 adapter = new AdapterBarangAdmin2(AdminActivity.this, listBarang);

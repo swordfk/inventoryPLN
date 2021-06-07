@@ -42,7 +42,7 @@ public class MainKepalaGudang extends AppCompatActivity {
     private ValueEventListener mDBListener;
     String kueri;
     private List<Permintaan> listPermintaan = new ArrayList<>();
-    Button semua, sebulan;
+//    Button semua, sebulan;
     LinearLayout layout;
     ImageView export;
     TextView total;
@@ -55,8 +55,8 @@ public class MainKepalaGudang extends AppCompatActivity {
         total = findViewById(R.id.totalharga);
         export = findViewById(R.id.download);
         layout = findViewById(R.id.layout);
-        semua = findViewById(R.id.semua);
-        sebulan = findViewById(R.id.sebulan);
+//        semua = findViewById(R.id.semua);
+//        sebulan = findViewById(R.id.sebulan);
         recyclerView = findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -79,22 +79,22 @@ public class MainKepalaGudang extends AppCompatActivity {
 
         getData();
 
-        sebulan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabaseRef = FirebaseDatabase.getInstance().getReference("permintaanK");
-                getDataSatuBulan();
-                Toast.makeText(MainKepalaGudang.this, listPermintaan.size()+"", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        semua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabaseRef = FirebaseDatabase.getInstance().getReference("permintaan");
-                getData();
-            }
-        });
+//        sebulan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mDatabaseRef = FirebaseDatabase.getInstance().getReference("permintaanK");
+//                getDataSatuBulan();
+//                Toast.makeText(MainKepalaGudang.this, listPermintaan.size()+"", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        semua.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mDatabaseRef = FirebaseDatabase.getInstance().getReference("permintaan");
+//                getData();
+//            }
+//        });
     }
 
     private void getData(){
@@ -105,9 +105,9 @@ public class MainKepalaGudang extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listPermintaan.clear();
-                for (DataSnapshot ktpSnapshot : snapshot.getChildren()) {
-                    Permintaan upload = ktpSnapshot.getValue(Permintaan.class);
-                    upload.setKey(ktpSnapshot.getKey());
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    Permintaan upload = snapshot1.getValue(Permintaan.class);
+                    upload.setKey(snapshot1.getKey());
                     listPermintaan.add(upload);
                 }
                 adapter = new AdapterBarangGudang(MainKepalaGudang.this, listPermintaan);
