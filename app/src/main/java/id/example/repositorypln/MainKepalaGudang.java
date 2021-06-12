@@ -119,7 +119,7 @@ public class MainKepalaGudang extends AppCompatActivity {
                     totalharga += Integer.parseInt(listPermintaan.get(i).getPerolB());
                 }
 
-                total.setText(String.valueOf(totalharga));
+                total.setText("Rp. "+String.valueOf(totalharga)+",-");
             }
 
             @Override
